@@ -10,22 +10,47 @@ const config = {
   },
 };
 
-let formData = (rawData) => {
-  let form = new FormData();
-  Object.keys(rawData).forEach((key) => {
-    if (rawData[key]) {
-      if (Array.isArray(rawData[key])) {
-        rawData[key].forEach((item, index) => {
-          form.append(`${key}[${index}]`, item);
-        });
+// let formData = (rawData) => {
+//   let form = new FormData();
+//   Object.keys(rawData).forEach((key) => {
+//     if (rawData[key]) {
+//       if (Array.isArray(rawData[key])) {
+//         rawData[key].forEach((item, index) => {
+//           form.append(`${key}[${index}]`, item);
+//         });
+//       } else {
+//         form.append(key, rawData[key]);
+//       }
+//     }
+//   });
+//   return form;
+// };
+
+export const formData = (obj, form, namespace) => {
+  const fd = form || new FormData();
+  let formKey;
+
+  for (const property in obj) {
+    if (obj.hasOwnProperty(property)) {
+      if (namespace) {
+        formKey = namespace + "[" + property + "]";
       } else {
-        form.append(key, rawData[key]);
+        formKey = property;
+      }
+
+      if (
+        typeof obj[property] === "object" &&
+        !(obj[property] instanceof File)
+      ) {
+        formData(obj[property], fd, property);
+      } else {
+        fd.append(formKey, obj[property]);
       }
     }
-  });
-  return form;
-};
+  }
 
+  return fd;
+};
 // let formData = (rawData) => {
 //   let form = new FormData();
 //   Object.keys(rawData).forEach((key) => {

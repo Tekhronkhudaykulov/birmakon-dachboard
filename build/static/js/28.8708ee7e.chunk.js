@@ -1,0 +1,2 @@
+(this["webpackJsonpnova-market-it-marker"]=this["webpackJsonpnova-market-it-marker"]||[]).push([[28],{341:function(t,a,i){},362:function(t,a,i){"use strict";i.r(a);i(1),i(341);var n=i(3);a.default=function(){return Object(n.jsx)("h3",{style:{marginLeft:"30px"},children:"Hozirgi vaqtda analytica topilmadi!"})}}}]);
+//# sourceMappingURL=28.8708ee7e.chunk.js.map
